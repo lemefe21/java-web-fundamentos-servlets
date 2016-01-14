@@ -1,0 +1,17 @@
+- cada recurso utilizado na tela é feita uma requisição no servidor.
+
+- GET 
+- Mais utilizado para trazer/carregar recursos do servidor ou executar uma ação que não cause algum efeito
+colateral no servidor, como por exemplo, impressão ou delete.
+- Algumas vantagens do GET estão ligadas com a possibilidade de cachear o resultado da requisição mesmo que o 
+servidor não indique nada sobre cache para seus clientes. Isso faz com que proxies no meio do caminho armazenem
+o resultado e sirvam a mesma informação posteriormente.
+- O método GET deve ser usado para buscar informações, para requisições que não trazem efeitos colaterais 
+indesejáveis, para requisições que podem ser requisitadas diversas vezes sem causar nenhum dano.
+
+- POST
+- Para executar ações no servidor.
+- O método POST é considerado um método que efetua uma alteração de estado no servidor - por isso o navegador 
+sempre pergunta se você tem certeza do que faz ao atualizar uma página que fez POST. Ele tem um número ilimitado 
+de bytes que podem ser enviados em seu corpo - incluindo conteúdo binário como imagens - e por padrão não é 
+cacheado (mas pode ser caso o servidor deseje).
