@@ -5,10 +5,10 @@ import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import br.com.alura.gerenciador.Usuario;
 import br.com.alura.gerenciador.dao.UsuarioDAO;
@@ -29,11 +29,14 @@ public class Login extends HttpServlet{
 			writer.println("<html><body>Usuário ou Senha inválida!</body></html>");
 		}else {
 
-			Cookie cookie = new Cookie("usuario.logado", usuario.getEmail());
-			cookie.setMaxAge(10 * 60);
+			HttpSession session = req.getSession();
+			session.setAttribute("usuario.logado", usuario);
 
-			//envia para o cliente a resposta
-			resp.addCookie(cookie);
+			//subtituimos por Session
+			/*Cookie cookie = new Cookie("usuario.logado", usuario.getEmail());
+			cookie.setMaxAge(10 * 60);
+			//envia o cookie para o cliente na resposta
+			resp.addCookie(cookie);*/
 
 			writer.println("<html><body>Usuário logado: "+ usuario.getEmail() +"</body></html>");
 

@@ -9,8 +9,9 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+
+import br.com.alura.gerenciador.Usuario;
 
 @WebFilter(urlPatterns="/*") //todo mundo passa por esse filtro
 public class FiltroDeAuditoria implements Filter{
@@ -38,15 +39,16 @@ public class FiltroDeAuditoria implements Filter{
 
 	private String getUsuario(HttpServletRequest req) {
 
-		//quem fez o envio foi o cliente
+		//quem faz o req (envio) é cliente
+		//passamos a utilizar Session no lugar de Cookie
+		//Cookie cookie = new Cookies(req.getCookies()).buscaUsuarioLogado();
 
-		Cookie cookie = new Cookies(req.getCookies()).buscaUsuarioLogado();
+		Usuario usuario = (Usuario) req.getSession().getAttribute("usuario.logado");
 
-		if(cookie == null) {
+		if(usuario == null) {
 			return "<deslogado>";
 		}
-
-		return cookie.getValue();
+		return usuario.getEmail();
 	}
 
 	@Override
