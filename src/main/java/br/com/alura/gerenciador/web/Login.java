@@ -28,12 +28,15 @@ public class Login extends HttpServlet{
 		if(usuario == null) {
 			writer.println("<html><body>Usuário ou Senha inválida!</body></html>");
 		}else {
+
 			Cookie cookie = new Cookie("usuario.logado", usuario.getEmail());
+			cookie.setMaxAge(10 * 60);
 
 			//envia para o cliente a resposta
 			resp.addCookie(cookie);
 
 			writer.println("<html><body>Usuário logado: "+ usuario.getEmail() +"</body></html>");
+
 		}
 
 	}
