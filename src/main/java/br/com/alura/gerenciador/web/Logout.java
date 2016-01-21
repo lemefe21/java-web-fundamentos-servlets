@@ -17,10 +17,10 @@ public class Logout extends HttpServlet{
 	@Override //efeito colateral no servidor, por isso usamos post
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		//implementamos o sendRedirect para que depois do logout
+		//implementamos o sendRedirect para que depois de efetuar o logout
 		//caso o usuario atualize a pagina (reflesh) não lançar erro 412
 
-		Usuario usuario = (Usuario) req.getSession().getAttribute("usuario.logado");
+		Usuario usuario = (Usuario) req.getSession().getAttribute("usuarioLogado");
 		if(usuario == null) {
 
 			//redireciona para o index.html no lado do cliente caso não exista nenhum usuário logado
@@ -28,7 +28,7 @@ public class Logout extends HttpServlet{
 
 		}else {
 
-			req.getSession().removeAttribute("usuario.logado");
+			req.getSession().removeAttribute("usuarioLogado");
 
 			//outra abordagem mais definitiva
 			//req.getSession().invalidate();

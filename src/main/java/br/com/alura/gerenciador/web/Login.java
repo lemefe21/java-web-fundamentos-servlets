@@ -30,7 +30,7 @@ public class Login extends HttpServlet{
 		}else {
 
 			HttpSession session = req.getSession();
-			session.setAttribute("usuario.logado", usuario);
+			session.setAttribute("usuarioLogado", usuario);
 
 			//subtituimos por Session
 			/*Cookie cookie = new Cookie("usuario.logado", usuario.getEmail());
