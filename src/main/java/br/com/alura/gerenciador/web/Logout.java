@@ -1,13 +1,15 @@
 package br.com.alura.gerenciador.web;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import br.com.alura.gerenciador.Usuario;
 
 @WebServlet(urlPatterns="/logout")
 public class Logout extends HttpServlet{
@@ -15,22 +17,27 @@ public class Logout extends HttpServlet{
 	@Override //efeito colateral no servidor, por isso usamos post
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		req.getSession().removeAttribute("usuario.logado");
+		//implementamos o sendRedirect para que depois do logout
+		//caso o usuario atualize a pagina (reflesh) não lançar erro 412
 
-		//outra abordagem mais definitiva
-		//req.getSession().invalidate();
+		Usuario usuario = (Usuario) req.getSession().getAttribute("usuario.logado");
+		if(usuario == null) {
 
-		PrintWriter writer = resp.getWriter();
+			//redireciona para o index.html no lado do cliente caso não exista nenhum usuário logado
+			resp.sendRedirect("/gerenciador");
 
-		/*Cookie cookie = new Cookies(req.getCookies()).buscaUsuarioLogado();
-		if(cookie == null) {
-			writer.println("<html><body>Usuário não estava logado!</body></html>");
-			return;
+		}else {
+
+			req.getSession().removeAttribute("usuario.logado");
+
+			//outra abordagem mais definitiva
+			//req.getSession().invalidate();
+
+			//dispacha uma requisição no lado do servidor sem o usuário ter conhecimento
+			RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/paginas/logout.html");
+			dispatcher.forward(req, resp);
+
 		}
-		cookie.setMaxAge(0);
-		resp.addCookie(cookie);*/
-
-		writer.println("<html><body>Deslogado com sucesso!</body></html>");
 
 	}
 

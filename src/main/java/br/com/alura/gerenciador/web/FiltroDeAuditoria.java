@@ -24,6 +24,7 @@ public class FiltroDeAuditoria implements Filter{
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
 		HttpServletRequest req = (HttpServletRequest) request;
+
 		//dados que estão chegando da requisição
 		String uri = req.getRequestURI();
 
@@ -39,7 +40,7 @@ public class FiltroDeAuditoria implements Filter{
 
 	private String getUsuario(HttpServletRequest req) {
 
-		//quem faz o req (envio) é cliente
+		//quem faz o request (envio) é o cliente
 		//passamos a utilizar Session no lugar de Cookie
 		//Cookie cookie = new Cookies(req.getCookies()).buscaUsuarioLogado();
 
