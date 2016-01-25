@@ -17,7 +17,8 @@
 			Senha: <input type="text" name="senha">
 			<input type="submit" value="Logar">
 		</form>
-		<form action="logout" method="post">
+		<form action="fazTudo" method="post">
+			<input type="hidden" name="tarefa" value="Logout"> 
 			<input type="submit" value="Logout">
 		</form>
 	</body>
