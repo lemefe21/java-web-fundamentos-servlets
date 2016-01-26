@@ -8,7 +8,8 @@
 			Logado como ${usuarioLogado.email}<br/>
 		</c:if>
 		
-		<form action="novaEmpresa" method="post">
+		<form action="controller" method="post">
+		<input type="hidden" name="tarefa" value="NovaEmpresa"> 
 			Nome: <input type="text" name="nome">
 			<input type="submit" value="Enviar">
 		</form>
@@ -17,7 +18,7 @@
 			Senha: <input type="text" name="senha">
 			<input type="submit" value="Logar">
 		</form>
-		<form action="fazTudo" method="post">
+		<form action="controller" method="post">
 			<input type="hidden" name="tarefa" value="Logout"> 
 			<input type="submit" value="Logout">
 		</form>

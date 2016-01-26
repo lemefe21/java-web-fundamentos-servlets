@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(urlPatterns="/fazTudo")
-public class FazTudo extends HttpServlet {
+@WebServlet(urlPatterns="/controller")
+public class Controller extends HttpServlet {
 
 	//aagora responsável por redirecionar as servlets
 	@Override
